@@ -1,5 +1,7 @@
 package com.example.coolplanet.controller;
 
+import com.example.coolplanet.dto.AverageRequestDto;
+import com.example.coolplanet.dto.TaskRequestDto;
 import com.example.coolplanet.request.AverageRequest;
 import com.example.coolplanet.request.TaskRequest;
 import com.example.coolplanet.response.TaskAverageResponse;
@@ -30,6 +32,10 @@ public class AverageController {
             return ResponseEntity.badRequest().build();
         }
 
+        var taskRequestDto = TaskRequestDto.builder()
+                .taskIdentifier(taskRequest.getTaskIdentifier().toUpperCase())
+                .duration(taskRequest.getDuration()).build();
+
         var result = this.taskService.taskPerformed(taskRequest.getTaskIdentifier(), taskRequest.getDuration());
 
         return ResponseEntity.ok(result);
@@ -41,6 +47,9 @@ public class AverageController {
         if(averageRequest == null || averageRequestInvalid(averageRequest.getTaskIdentifier())) {
             return ResponseEntity.badRequest().build();
         }
+
+        var averageRequestDto = AverageRequestDto.builder()
+                .taskIdentifier(averageRequest.getTaskIdentifier()).build();
 
         var result = this.taskService.currentAverageTime(averageRequest.getTaskIdentifier());
 

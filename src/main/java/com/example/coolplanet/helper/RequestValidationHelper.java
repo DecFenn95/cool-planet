@@ -21,7 +21,7 @@ public class RequestValidationHelper {
 
     private static boolean taskIdentifierInvalidType(String taskIdentifier) {
         for (var type: TaskIdentifierType.values()) {
-            if(type.name().equals(taskIdentifier)) {
+            if(type.name().equals(taskIdentifier.toUpperCase())) {
                 return false;
             }
         }
