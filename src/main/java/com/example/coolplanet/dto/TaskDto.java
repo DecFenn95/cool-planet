@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class TaskDto {
-    private String TaskIdentifier;
+    private String taskIdentifier;
     private Double duration;
 }
 

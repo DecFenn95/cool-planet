@@ -21,11 +21,7 @@ public class TaskTypeOverview {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // getters and setters and constructor
-
-    public TaskTypeOverview() {
-
-    }
+    public TaskTypeOverview() { }
 
     public String getTaskIdentifierType() {
         return taskIdentifierType;

@@ -20,9 +20,7 @@ public class TaskTypeEvent {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    public TaskTypeEvent() {
-
-    }
+    public TaskTypeEvent() { }
 
     public String getTaskIdentifierType() {
         return taskIdentifierType;

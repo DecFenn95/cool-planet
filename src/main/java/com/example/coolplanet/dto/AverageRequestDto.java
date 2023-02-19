@@ -8,5 +8,5 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class AverageRequestDto {
-    String taskIdentifier;
+    private String taskIdentifier;
 }

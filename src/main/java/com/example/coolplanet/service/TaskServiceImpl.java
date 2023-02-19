@@ -30,7 +30,6 @@ public class TaskServiceImpl implements TaskService {
 
             this.taskTypeEventDataService.createTaskEvent(taskTypeEvent);
 
-            // if new taskIdentifier = create record in 2 tables (status table and overall table)
             this.averageService.calculateNewAverage(taskRequestDto.getTaskIdentifier());
         }
         catch (Exception e) {

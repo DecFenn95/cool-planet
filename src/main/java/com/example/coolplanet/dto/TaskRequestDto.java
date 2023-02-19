@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class TaskRequestDto {
-    String taskIdentifier;
-    Double duration;
+    private String taskIdentifier;
+    private double duration;
 }
 
