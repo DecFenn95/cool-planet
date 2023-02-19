@@ -1,6 +1,10 @@
 package com.example.coolplanet.service;
 
+import com.example.coolplanet.dto.AverageRequestDto;
+import com.example.coolplanet.dto.TaskRequestDto;
+import com.example.coolplanet.entity.TaskTypeEvent;
 import com.example.coolplanet.response.TaskAverageResponse;
+import com.example.coolplanet.service.data.TaskTypeEventDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -10,21 +14,27 @@ public class TaskServiceImpl implements TaskService {
 
     private final AverageService averageService;
 
-    public TaskServiceImpl(AverageService averageService) {
+    private final TaskTypeEventDataService taskTypeEventDataService;
+
+    public TaskServiceImpl(AverageService averageService, TaskTypeEventDataService taskTypeEventDataService) {
         this.averageService = averageService;
+        this.taskTypeEventDataService = taskTypeEventDataService;
     }
 
     @Override
-    public boolean taskPerformed(String taskIdentifier, Double duration) {
-
+    public boolean taskPerformed(TaskRequestDto taskRequestDto) {
         try {
-            // this.taskRepository.save(taskIdentifier, duration, LocalDateTime.now())
+            var taskTypeEvent = new TaskTypeEvent();
+            taskTypeEvent.setTaskIdentifierType(taskRequestDto.getTaskIdentifier());
+            taskTypeEvent.setDuration(taskRequestDto.getDuration());
 
-             // if new taskIdentifier = create record in 2 tables (status table and overall table)
-            this.averageService.calculateNewAverage(taskIdentifier);
+            this.taskTypeEventDataService.createTaskEvent(taskTypeEvent);
+
+            // if new taskIdentifier = create record in 2 tables (status table and overall table)
+            this.averageService.calculateNewAverage(taskRequestDto.getTaskIdentifier());
         }
         catch (Exception e) {
-            log.warn(String.format("Issue while adding task: %s", e.getMessage()));
+            log.error("Issue while adding task event!");
             return false;
         }
 
@@ -32,9 +42,15 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskAverageResponse currentAverageTime(String taskIdentifier) {
-        var averageDuration = this.averageService.getAverageDuration(taskIdentifier);
+    public TaskAverageResponse currentAverageTime(AverageRequestDto averageRequestDto) {
+        try {
+            var averageDuration = this.averageService.getAverageDuration(averageRequestDto.getTaskIdentifier());
 
-        return TaskAverageResponse.builder().taskIdentifier(taskIdentifier).averageDuration(averageDuration).build();
+            return TaskAverageResponse.builder().taskIdentifier(averageRequestDto.getTaskIdentifier()).averageDuration(averageDuration).build();
+        }
+        catch (Exception e) {
+            log.error("Issue while retrieving current average!");
+            return TaskAverageResponse.builder().taskIdentifier(averageRequestDto.getTaskIdentifier()).averageDuration(0.0).build();
+        }
     }
 }

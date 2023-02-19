@@ -1,6 +1,6 @@
 package com.example.coolplanet.repository;
 
-import com.example.coolplanet.models.TaskTypeEvent;
+import com.example.coolplanet.entity.TaskTypeEvent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

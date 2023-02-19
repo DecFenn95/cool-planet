@@ -36,7 +36,7 @@ public class AverageController {
                 .taskIdentifier(taskRequest.getTaskIdentifier().toUpperCase())
                 .duration(taskRequest.getDuration()).build();
 
-        var result = this.taskService.taskPerformed(taskRequest.getTaskIdentifier(), taskRequest.getDuration());
+        var result = this.taskService.taskPerformed(taskRequestDto);
 
         return ResponseEntity.ok(result);
     }
@@ -51,7 +51,7 @@ public class AverageController {
         var averageRequestDto = AverageRequestDto.builder()
                 .taskIdentifier(averageRequest.getTaskIdentifier()).build();
 
-        var result = this.taskService.currentAverageTime(averageRequest.getTaskIdentifier());
+        var result = this.taskService.currentAverageTime(averageRequestDto);
 
         return ResponseEntity.ok(result);
     }

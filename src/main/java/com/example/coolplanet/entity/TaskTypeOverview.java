@@ -1,4 +1,4 @@
-package com.example.coolplanet.models;
+package com.example.coolplanet.entity;
 
 import jakarta.persistence.*;
 

@@ -1,11 +1,10 @@
-package com.example.coolplanet.service;
+package com.example.coolplanet.service.data;
 
-import com.example.coolplanet.models.TaskTypeOverview;
+import com.example.coolplanet.entity.TaskTypeOverview;
 import com.example.coolplanet.repository.TaskTypeOverviewRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class TaskTypeOverviewDataService {
@@ -22,9 +21,5 @@ public class TaskTypeOverviewDataService {
 
     public void updateAverageByTaskIdentifierType(String taskIdentifier, Double newAverage) {
         this.taskTypeOverviewRepository.updateAverageByTaskIdentifierType(newAverage, LocalDateTime.now(), taskIdentifier);
-    }
-
-    public List<TaskTypeOverview> getAll() {
-        return this.taskTypeOverviewRepository.findAll();
     }
 }

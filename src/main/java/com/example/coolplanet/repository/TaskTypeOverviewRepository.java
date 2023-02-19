@@ -1,6 +1,6 @@
 package com.example.coolplanet.repository;
 
-import com.example.coolplanet.models.TaskTypeOverview;
+import com.example.coolplanet.entity.TaskTypeOverview;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

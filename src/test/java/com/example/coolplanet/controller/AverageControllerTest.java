@@ -1,5 +1,7 @@
 package com.example.coolplanet.controller;
 
+import com.example.coolplanet.dto.AverageRequestDto;
+import com.example.coolplanet.dto.TaskRequestDto;
 import com.example.coolplanet.request.AverageRequest;
 import com.example.coolplanet.request.TaskRequest;
 import com.example.coolplanet.response.TaskAverageResponse;
@@ -14,8 +16,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyDouble;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -46,7 +47,7 @@ class AverageControllerTest {
 
     @Test
     void taskPerformed_whenTaskRequestValid_returnSuccessfulRequest() {
-        when(this.taskService.taskPerformed(anyString(), anyDouble())).thenReturn(true);
+        when(this.taskService.taskPerformed(any(TaskRequestDto.class))).thenReturn(true);
 
         var taskRequest = TaskRequest.builder().taskIdentifier("A").duration(10.0).build();
         var result = this.averageController.taskPerformed(taskRequest);
@@ -70,7 +71,7 @@ class AverageControllerTest {
     @Test
     void currentAverageTime_whenAverageRequestValid_returnSuccessfulRequest() {
         var response = TaskAverageResponse.builder().taskIdentifier("A").averageDuration(5.0).build();
-        when(this.taskService.currentAverageTime(anyString())).thenReturn(response);
+        when(this.taskService.currentAverageTime(any(AverageRequestDto.class))).thenReturn(response);
 
         var averageRequest = AverageRequest.builder().taskIdentifier("A").build();
         var result = this.averageController.currentAverageTime(averageRequest);

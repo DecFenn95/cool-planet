@@ -5,5 +5,6 @@ public enum TaskIdentifierType {
     B,
     C,
     D,
-    E
+    E,
+    F
 }

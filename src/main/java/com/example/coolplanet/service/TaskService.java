@@ -1,10 +1,12 @@
 package com.example.coolplanet.service;
 
+import com.example.coolplanet.dto.AverageRequestDto;
+import com.example.coolplanet.dto.TaskRequestDto;
 import com.example.coolplanet.response.TaskAverageResponse;
 
 public interface TaskService {
 
-    boolean taskPerformed(String taskId, Double average);
+    boolean taskPerformed(TaskRequestDto taskRequestDto);
 
-    TaskAverageResponse currentAverageTime(String taskId);
+    TaskAverageResponse currentAverageTime(AverageRequestDto averageRequestDto);
 }

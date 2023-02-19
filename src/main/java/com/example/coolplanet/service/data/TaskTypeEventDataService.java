@@ -1,9 +1,7 @@
-package com.example.coolplanet.service;
+package com.example.coolplanet.service.data;
 
-import com.example.coolplanet.models.TaskTypeEvent;
-import com.example.coolplanet.models.TaskTypeOverview;
+import com.example.coolplanet.entity.TaskTypeEvent;
 import com.example.coolplanet.repository.TaskTypeEventRepository;
-import com.example.coolplanet.repository.TaskTypeOverviewRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,7 +24,8 @@ public class TaskTypeEventDataService {
         return this.taskTypeEventRepository.getEventsSinceLastUpdateByTaskIdentifier(taskIdentifier, lastUpdatedAt);
     }
 
-    public List<TaskTypeEvent> getAll() {
-        return this.taskTypeEventRepository.findAll();
+    public void createTaskEvent(TaskTypeEvent taskTypeEvent) {
+        taskTypeEvent.setCreatedAt(LocalDateTime.now());
+        this.taskTypeEventRepository.save(taskTypeEvent);
     }
 }
